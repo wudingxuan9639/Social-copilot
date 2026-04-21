@@ -98,7 +98,7 @@ class TestWeChatParser:
         在 CI 环境（无微信）中，应返回 None 而非抛出异常。
 
         TODO:
-            from distiller.parser import WeChatParser
+            from core.skill_distiller.parser import WeChatParser
             parser = WeChatParser()
             result = parser.locate_db()
             assert result is None or isinstance(result, str)
@@ -152,7 +152,7 @@ class TestFeatureExtractor:
         extract_phrases() 应返回按出现频率降序排列的短语列表。
 
         TODO:
-            from distiller.feature_extractor import extract_phrases
+            from core.skill_distiller.feature_extractor import extract_phrases
             phrases = extract_phrases(sample_corpus)
             frequencies = [p["frequency"] for p in phrases]
             assert frequencies == sorted(frequencies, reverse=True)
@@ -218,7 +218,7 @@ class TestSkillBuilder:
         build_from_features() 应返回结构化的 Skill 对象，不抛出异常。
 
         TODO:
-            from distiller.skill_builder import SkillBuilder
+            from core.skill_distiller.skill_builder import SkillBuilder
             builder = SkillBuilder()
             skill = builder.build_from_features(sample_feature_asset)
             assert skill is not None
@@ -292,7 +292,7 @@ class TestEncryptor:
         encrypt() 的输出不应与明文相同（即确实做了加密处理）。
 
         TODO:
-            from distiller.encryptor import encrypt
+            from core.skill_distiller.encryptor import encrypt
             plaintext = b'{"phrases": ["好的", "对齐"]}'
             ciphertext = encrypt(plaintext)
             assert ciphertext != plaintext
@@ -304,7 +304,7 @@ class TestEncryptor:
         encrypt() + decrypt() 应完整还原原始字节数据。
 
         TODO:
-            from distiller.encryptor import encrypt, decrypt
+            from core.skill_distiller.encryptor import encrypt, decrypt
             plaintext = b'{"version": "1.0"}'
             assert decrypt(encrypt(plaintext)) == plaintext
         """
@@ -327,7 +327,7 @@ class TestEncryptor:
         相同设备上，两次派生的密钥应完全一致（保证文件可重复解密）。
 
         TODO:
-            from distiller.encryptor import derive_device_key
+            from core.skill_distiller.encryptor import derive_device_key
             key1 = derive_device_key()
             key2 = derive_device_key()
             assert key1 == key2
